@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "888174756160",
+    "project_id": "feiradecompras-86ce1",
+    "storage_bucket": "feiradecompras-86ce1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:888174756160:android:713fd9b53430919467faa5",
+        "android_client_info": {
+          "package_name": "com.example.feirafacil"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDUeYnRdSBaET8iy5BLPf_gEKE-HDj9pQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
