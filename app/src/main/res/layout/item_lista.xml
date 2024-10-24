@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/textPoduto"
+        android:id="@+id/textProduto"
         android:layout_width="120dp"
         android:layout_height="26dp"
         android:layout_marginStart="8dp"
@@ -30,12 +30,12 @@
         android:textAlignment="center"
         android:textSize="16dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/textPoduto"
-        app:layout_constraintStart_toEndOf="@+id/textPoduto"
-        app:layout_constraintTop_toTopOf="@+id/textPoduto" />
+        app:layout_constraintBottom_toBottomOf="@+id/textProduto"
+        app:layout_constraintStart_toEndOf="@+id/textProduto"
+        app:layout_constraintTop_toTopOf="@+id/textProduto" />
 
     <TextView
-        android:id="@+id/textPreco"
+        android:id="@+id/textValor"
         android:layout_width="75dp"
         android:layout_height="26dp"
         android:layout_marginStart="16dp"

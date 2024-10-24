@@ -1,11 +1,8 @@
-package com.example.feirafacil
+package com.example.feirafacil.activites
 
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.feirafacil.databinding.ActivityAtualizarItemBinding
-import com.example.feirafacil.model.Lista
 
 class AtualizarItemActivity : AppCompatActivity() {
 

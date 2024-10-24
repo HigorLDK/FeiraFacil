@@ -1,58 +1,50 @@
 package com.example.feirafacil.adapter
 
-import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import com.example.feirafacil.databinding.ItemListaBinding
-import com.example.feirafacil.model.Lista
+import androidx.recyclerview.widget.RecyclerView.Adapter
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.example.feirafacil.databinding.ListaFeirarvBinding
+import com.example.feirafacil.model.Feira
 
-class FeiraAdapter(var listaProdutos : List<Lista>, context : Context, val onClickEditar : (Lista) -> Unit, val onClickExcluir: (Int) -> Unit) : RecyclerView.Adapter<FeiraAdapter.ViewHolder>() {
+class FeiraAdapter(private val onClick: (Feira) -> Unit) : Adapter<FeiraAdapter.FeiraViewHolder>() {
 
-    //private var listaProdutos: List<Lista> = emptyList()
-
-    fun adicionarLista(lista : List<Lista>){
-        this.listaProdutos = lista
-        Log.i("info_db", "$listaProdutos")
-
+    private var listaFeira = mutableListOf<Feira>()
+    fun adicionarFeira(lista: MutableList<Feira>){
+            listaFeira = lista
         notifyDataSetChanged()
     }
 
-    inner class ViewHolder(itemBinding : ItemListaBinding) : RecyclerView.ViewHolder(itemBinding.root) {
 
-        private val binding: ItemListaBinding = itemBinding
+    inner class FeiraViewHolder(private val binding : ListaFeirarvBinding) : ViewHolder(binding.root){
 
-        fun bind(lista : Lista){
+        fun bind(feira : Feira){
 
-            binding.textPoduto.text = lista.itemProduto
-            binding.textQuantidade.text = lista.quantProduto.toString()
-            binding.textPreco.text = "R$ "+lista.precoProduto.toString()
-            binding.btnEditar.setOnClickListener {
-                    onClickEditar(lista)
+            binding.textTituloFeira.text = feira.idFeira
 
+            binding.clFeira.setOnClickListener {
+                onClick(feira)
             }
-            binding.btnExluir.setOnClickListener {
-                onClickExcluir(lista.idProduto)
-            }
+
         }
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemListaBinding = ItemListaBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(itemListaBinding)
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val newList = listaProdutos[position]
-        holder.bind(newList)
-
-
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeiraViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        val itemView = ListaFeirarvBinding.inflate(
+            inflater,parent,false
+        )
+        return FeiraViewHolder(itemView)
     }
 
     override fun getItemCount(): Int {
-        return  listaProdutos.size
+        return listaFeira.size
     }
+
+    override fun onBindViewHolder(holder: FeiraViewHolder, position: Int) {
+        val feira = listaFeira[position]
+        holder.bind(feira)
+    }
+
 }

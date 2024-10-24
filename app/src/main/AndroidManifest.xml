@@ -15,20 +15,20 @@
         android:theme="@style/Theme.FeiraFacil"
         tools:targetApi="31">
         <activity
-            android:name=".ListaFeiraActivity"
+            android:name=".activites.ListaFeiraActivity"
             android:exported="false" />
         <activity
-            android:name=".AtualizarItemActivity"
+            android:name=".activites.AtualizarItemActivity"
             android:exported="false" />
         <activity
-            android:name=".AddItemActivity"
+            android:name=".activites.AddItemActivity"
             android:exported="false" />
         <activity
-            android:name=".NovaFeiraActivity"
+            android:name=".activites.NovaFeiraActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activites.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
