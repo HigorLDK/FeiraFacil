@@ -6,5 +6,6 @@ import java.io.Serializable
 
 @Parcelize
 data class Feira(
-    val idFeira : String = ""
+    var idFeira : String = "",
+    var nomeFeira : String = ""
 ) : Parcelable

@@ -12,6 +12,7 @@ import com.example.feirafacil.R
 import com.example.feirafacil.adapter.FeiraAdapter
 import com.example.feirafacil.databinding.ActivityMainBinding
 import com.example.feirafacil.model.Feira
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class MainActivity : AppCompatActivity() {
@@ -22,15 +23,55 @@ class MainActivity : AppCompatActivity() {
         FirebaseFirestore.getInstance()
     }
 
+    private val firebaseAuth by lazy {
+        FirebaseAuth.getInstance()
+    }
+
+    private lateinit var usuarioUID : String
+
+    private lateinit var tituloFeira : String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
 
+        usuarioUID = firebaseAuth.currentUser!!.uid
+
+        if(firebaseAuth.currentUser == null){
+            logarAnonimo()
+        }else{
+            val currentUser = firebaseAuth.currentUser
+            currentUser?.let {
+                val uid = it.uid
+                Log.i("uiduser", "$uid")
+            }
+        }
+
         eventosClique()
 
+    }
 
+    private fun logarAnonimo() {
+
+        firebaseAuth.signInAnonymously()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(this, "Sucesso ao realizar login", Toast.LENGTH_SHORT).show()
+                    // Login anônimo bem-sucedido, você pode acessar o UID do usuário
+                    val user = firebaseAuth.currentUser
+                    user?.let {
+                        val uid = it.uid
+                        // Use o UID como necessário
+                    }
+                } else {
+                    // Tratar falhas de autenticação
+                    task.exception?.let {
+                        // Lidar com o erro
+                    }
+                }
+            }
     }
 
     override fun onStart() {
@@ -51,15 +92,9 @@ class MainActivity : AppCompatActivity() {
             alertBuilder.setPositiveButton("Salvar"){_,_ ->
                 //capturo o titulo da feira
                 val titulo = editText.text.toString()
+                tituloFeira = titulo
 
                 salvarIdFeira(titulo)
-
-
-                //passa o titulo para proxima activity
-                val intent = Intent(this,AddItemActivity::class.java)
-                intent.putExtra("tituloFeira", titulo)
-                startActivity(intent)
-
 
             }
             alertBuilder.setNegativeButton("Cancelar"){_,_ -> }
@@ -76,19 +111,41 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun salvarIdFeira(idFeira : String) {
+    private fun salvarIdFeira(nomeFeira : String) {
 
-        val dados = mapOf(
-            "idFeira" to idFeira
-        )
+        // Verifica se já existe uma feira com o mesmo título
+        firebaseStore.collection("usuarios")
+            .document(usuarioUID)
+            .collection("idFeiras")
+            .whereEqualTo("idFeira", nomeFeira)
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                if (!querySnapshot.isEmpty) {
+                    // Feira com esse título já existe
+                    Toast.makeText(this, "Uma feira com esse título já existe!", Toast.LENGTH_SHORT).show()
+                } else {
+                    // Não existe feira com esse título, prosseguir com a criação
+                    val dados = mapOf(
+                        "nomeFeira" to nomeFeira
+                    )
 
-        firebaseStore.collection("idFeiras")
-            .add(dados)
-            .addOnSuccessListener {
-                Toast.makeText(this, "Sucesso ao salvar produto", Toast.LENGTH_LONG)
-                    .show()
-            }.addOnFailureListener { erro ->
-                Toast.makeText(this, "Erro ao salvar produto", Toast.LENGTH_LONG).show()
+                    firebaseStore.collection("usuarios")
+                        .document(usuarioUID)
+                        .collection("idFeiras")
+                        .add(dados)
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "Feira salva com sucesso", Toast.LENGTH_LONG).show()
+                        }.addOnFailureListener { erro ->
+                            Toast.makeText(this, "Erro ao salvar feira: ${erro.message}", Toast.LENGTH_LONG).show()
+                        }
+
+                    val intent = Intent(this,AddItemActivity::class.java)
+                    intent.putExtra("tituloFeira", tituloFeira)
+                    startActivity(intent)
+                }
+            }
+            .addOnFailureListener { erro ->
+                Toast.makeText(this, "Erro ao verificar feira: ${erro.message}", Toast.LENGTH_LONG).show()
             }
     }
 

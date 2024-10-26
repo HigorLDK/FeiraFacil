@@ -3,11 +3,13 @@ package com.example.feirafacil.activites
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.feirafacil.adapter.FeiraAdapter
 import com.example.feirafacil.databinding.ActivityListaFeiraBinding
 import com.example.feirafacil.model.Feira
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class ListaFeiraActivity : AppCompatActivity() {
@@ -20,6 +22,12 @@ class ListaFeiraActivity : AppCompatActivity() {
         FirebaseFirestore.getInstance()
     }
 
+    private val firebaseAuth by lazy {
+        FirebaseAuth.getInstance()
+    }
+
+    private lateinit var usuarioUID : String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityListaFeiraBinding.inflate(layoutInflater)
@@ -27,14 +35,72 @@ class ListaFeiraActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
 
-            feiraAdapter = FeiraAdapter{ feira ->
+        usuarioUID = firebaseAuth.currentUser!!.uid
+
+            feiraAdapter = FeiraAdapter({ feira ->
                 val intent = Intent(this,NovaFeiraActivity::class.java)
-                intent.putExtra("tituloFeira", feira)
+                intent.putExtra("source", "ActivityLista")
+                intent.putExtra("tituloFeira", feira.nomeFeira)
                 intent.action = "ActivityListaFeira"
                 startActivity(intent)
-            }
+                finish()
+            }, { idFeira, nomeFeira ->
+                excluirFeira(idFeira, nomeFeira)
+            })
             binding.rvListaFeira.adapter = feiraAdapter
             binding.rvListaFeira.layoutManager = LinearLayoutManager(this)
+
+    }
+
+    private fun excluirFeira(idFeira: String, nomeFeira: String) {
+
+        firebaseStore
+            .collection("usuarios")
+            .document(usuarioUID)
+            .collection("idFeiras")
+            .document(idFeira)
+            .delete()
+            .addOnSuccessListener {
+                Toast.makeText(this, "Feira e itens apagados com sucesso", Toast.LENGTH_LONG).show()
+            }.addOnFailureListener { erro ->
+                Toast.makeText(this, "Erro ao apagar feira: ${erro.message}", Toast.LENGTH_LONG).show()
+            }
+
+        val feiraRef = firebaseStore.collection("usuarios")
+            .document(usuarioUID)
+            .collection("feiras")
+            .document(nomeFeira)
+
+        // Primeiro, apaga todos os itens da subcoleção "itens"
+        feiraRef.collection("itens")
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                val batch = firebaseStore.batch()
+
+                // Para cada documento na subcoleção "itens", adiciona uma operação de deletar no batch
+                for (document in querySnapshot.documents) {
+                    val itemRef = feiraRef.collection("itens").document(document.id)
+                    batch.delete(itemRef)
+                }
+
+                // Apaga todos os itens e depois apaga a feira
+                batch.commit().addOnSuccessListener {
+                    // Após apagar os itens, apaga o documento da feira
+                    feiraRef.delete()
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "Feira e itens apagados com sucesso", Toast.LENGTH_LONG).show()
+                        }
+                        .addOnFailureListener { erro ->
+                            Toast.makeText(this, "Erro ao apagar feira: ${erro.message}", Toast.LENGTH_LONG).show()
+                        }
+                }.addOnFailureListener { erro ->
+                    Toast.makeText(this, "Erro ao apagar itens: ${erro.message}", Toast.LENGTH_LONG).show()
+                }
+            }
+            .addOnFailureListener { erro ->
+                Toast.makeText(this, "Erro ao obter itens: ${erro.message}", Toast.LENGTH_LONG).show()
+            }
+        recuperarDados()
 
     }
 
@@ -48,6 +114,8 @@ class ListaFeiraActivity : AppCompatActivity() {
 
 
         firebaseStore
+            .collection("usuarios")
+            .document(usuarioUID)
             .collection("idFeiras")
             .addSnapshotListener { querySnapshot, error ->
 
@@ -59,17 +127,22 @@ class ListaFeiraActivity : AppCompatActivity() {
 
                     //Transforma os dados recuperados em Objeto
                     val lista = documentSnapshot.toObject(Feira::class.java)
+                    lista?.idFeira = documentSnapshot.id
                     if (lista != null) {
                         listaFeiras.add(lista)
 
                     }
                 }
-
+                Log.i("testefeira", "$listaFeiras")
                 if (listaFeiras.isNotEmpty()) {
+                    feiraAdapter.adicionarFeira(listaFeiras)
+                }else{
                     feiraAdapter.adicionarFeira(listaFeiras)
                 }
 
             }
 
         }
+
+
     }

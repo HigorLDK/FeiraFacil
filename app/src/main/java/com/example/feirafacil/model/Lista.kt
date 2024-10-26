@@ -7,5 +7,6 @@ data class Lista(
     val quantidade : Int = 0,
     val valor: Double = 0.0,
     val valorTotal: Double = 0.0,
-    val idFeira : String = ""
+    val idFeira : String = "",
+    var idProduto : String = ""
 ) : Serializable

@@ -4,18 +4,15 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.feirafacil.R
 import com.example.feirafacil.adapter.ProdutosAdapter
 import com.example.feirafacil.databinding.ActivityNovaFeiraBinding
 import com.example.feirafacil.model.Feira
 import com.example.feirafacil.model.Lista
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class NovaFeiraActivity : AppCompatActivity() {
@@ -28,6 +25,12 @@ class NovaFeiraActivity : AppCompatActivity() {
         FirebaseFirestore.getInstance()
     }
 
+    private val firebaseAuth by lazy {
+        FirebaseAuth.getInstance()
+    }
+
+    private lateinit var usuarioUID : String
+
     private lateinit var tituloFeira : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,9 +38,13 @@ class NovaFeiraActivity : AppCompatActivity() {
         binding = ActivityNovaFeiraBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        usuarioUID = firebaseAuth.currentUser!!.uid
+
         eventosClique()
 
-        produtosAdapter = ProdutosAdapter()
+        produtosAdapter = ProdutosAdapter { documentId ->
+            confirmarExclusao(documentId)
+        }
         binding.rvFeira.adapter = produtosAdapter
         binding.rvFeira.layoutManager = LinearLayoutManager(this)
         binding.rvFeira.addItemDecoration(
@@ -46,7 +53,27 @@ class NovaFeiraActivity : AppCompatActivity() {
             )
         )
 
+        val intent = intent
+        val source = intent.getStringExtra("source")
+        val data = intent.getStringExtra("tituloFeira")
+
+        // Verificar de qual Activity veio a Intent
+        if (source == "ActivityLista") {
+            // Dados vieram da ActivityLista
+            Log.i("testefeira", "ActivityLista = $data")
+            if (data != null) {
+                tituloFeira = data
+            }
+        } else if (source == "ActivityItem") {
+            // Dados vieram da ActivityItem
+            Log.i("testefeira", "ActivityItem = $data")
+            if (data != null) {
+                tituloFeira = data
+            }
+        }
+
     }
+
 
     override fun onStart() {
         super.onStart()
@@ -54,23 +81,16 @@ class NovaFeiraActivity : AppCompatActivity() {
 
     }
 
-
     private fun recuperarDados() {
 
 
-        val extras = intent.extras
-        if (extras != null) {
-            val titulo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                extras.getParcelable("tituloFeira", Feira::class.java)
-            } else {
-                extras.getParcelable("tituloFeira")
-            }
-            if (titulo != null) {
-
-                tituloFeira = titulo.idFeira
-                firebaseStore
-                    .collection(tituloFeira)
+                firebaseStore.collection("usuarios")
+                    .document(usuarioUID)
+                    .collection("feiras")
+                    .document(tituloFeira)
+                    .collection("itens")
                     .addSnapshotListener { querySnapshot, error ->
+
 
                         val listaProdutos = mutableListOf<Lista>()
 
@@ -81,66 +101,58 @@ class NovaFeiraActivity : AppCompatActivity() {
 
                             //Transforma os dados recuperados em Objeto
                             val lista = documentSnapshot.toObject(Lista::class.java)
+                            lista?.idProduto = documentSnapshot.id
                             if (lista != null) {
                                 listaProdutos.add(lista)
 
 
                                 listaCamposEspecificos.add(lista.idFeira)
-                                //Log.i("teste", "$listaCamposEspecificos")
+
                                 //Pega todos os valoresTotais e soma
                                 val valores = listaProdutos.sumOf { it.valorTotal }
-                                binding.textValorTotal.text = valores.toString()
+                                binding.textValorTotal.text = String.format("R$ %,.2f", valores)
                             }
                         }
 
                         if (listaProdutos.isNotEmpty()) {
                             produtosAdapter.adicionarLista(listaProdutos)
-                        }
-
-                    }
-            }
-        }
-
-            val tituloRecebido = intent.getStringExtra("tituloFeira")
-            if (tituloRecebido != null) {
-                tituloFeira = tituloRecebido
-
-
-                firebaseStore
-                    .collection(tituloFeira)
-                    .addSnapshotListener { querySnapshot, error ->
-
-                        val listaProdutos = mutableListOf<Lista>()
-
-                        val listaCamposEspecificos = mutableListOf<String>()
-                        //Recupera os dados que estão dentro dessa querrySnapshot
-                        val documentos = querySnapshot?.documents
-                        documentos?.forEach { documentSnapshot ->
-
-                            //Transforma os dados recuperados em Objeto
-                            val lista = documentSnapshot.toObject(Lista::class.java)
-                            if (lista != null) {
-                                listaProdutos.add(lista)
-
-
-                                listaCamposEspecificos.add(lista.idFeira)
-                                //Log.i("teste", "$listaCamposEspecificos")
-                                //Pega todos os valoresTotais e soma
-                                val valores = listaProdutos.sumOf { it.valorTotal }
-                                binding.textValorTotal.text = valores.toString()
-                            }
-                        }
-
-                        if (listaProdutos.isNotEmpty()) {
+                        }else{
                             produtosAdapter.adicionarLista(listaProdutos)
+                            binding.textValorTotal.text = "R$ 0.000,00"
                         }
 
                     }
 
-
-            }
     }
 
+    private fun confirmarExclusao(documentId: String) {
+
+
+            val alertBuilder = AlertDialog.Builder(this)
+
+            alertBuilder.setTitle("Confirmar Exclusão")
+            alertBuilder.setMessage("Deseja realmente excluir o produto?")
+
+            alertBuilder.setPositiveButton("Sim") { _, _ ->
+
+
+                    firebaseStore
+                        .collection("usuarios")
+                        .document(usuarioUID)
+                        .collection("feiras")
+                        .document(tituloFeira)
+                        .collection("itens")
+                        .document(documentId)
+                        .delete()
+
+                recuperarDados()
+
+            }
+            alertBuilder.setNegativeButton("Não") { _, _ -> }
+
+            alertBuilder.create().show()
+
+    }
 
     private fun eventosClique() {
 
@@ -151,14 +163,15 @@ class NovaFeiraActivity : AppCompatActivity() {
                     val intent = Intent(this,AddItemActivity::class.java)
                     intent.putExtra("tituloFeira", tituloFeira)
                     startActivity(intent)
+                    finish()
                 }
                 "ActivityAddItem" -> {
                     val intent = Intent(this,AddItemActivity::class.java)
                     intent.putExtra("tituloFeira", tituloFeira)
                     startActivity(intent)
+                    finish()
                 }
             }
-
 
         }
 

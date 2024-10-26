@@ -45,6 +45,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.4.0"))//Firebase
     implementation("com.google.firebase:firebase-analytics")//Analytics
     implementation("com.google.firebase:firebase-firestore-ktx")//Banco de dados
+    implementation("com.google.firebase:firebase-auth-ktx")//Autenticação
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")

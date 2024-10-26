@@ -1,17 +1,20 @@
 package com.example.feirafacil.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.feirafacil.databinding.ListaFeirarvBinding
 import com.example.feirafacil.model.Feira
+import com.google.api.Context
 
-class FeiraAdapter(private val onClick: (Feira) -> Unit) : Adapter<FeiraAdapter.FeiraViewHolder>() {
+class FeiraAdapter(private val onClick: (Feira) -> Unit, private val onClickExcluir : (String, String) -> Unit) : Adapter<FeiraAdapter.FeiraViewHolder>() {
 
     private var listaFeira = mutableListOf<Feira>()
     fun adicionarFeira(lista: MutableList<Feira>){
-            listaFeira = lista
+        listaFeira = lista
         notifyDataSetChanged()
     }
 
@@ -20,10 +23,14 @@ class FeiraAdapter(private val onClick: (Feira) -> Unit) : Adapter<FeiraAdapter.
 
         fun bind(feira : Feira){
 
-            binding.textTituloFeira.text = feira.idFeira
+            binding.textTituloFeira.text = feira.nomeFeira
 
             binding.clFeira.setOnClickListener {
                 onClick(feira)
+            }
+
+            binding.btnExcluirFeira.setOnClickListener {
+               onClickExcluir(feira.idFeira, feira.nomeFeira)
             }
 
         }

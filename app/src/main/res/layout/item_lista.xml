@@ -9,14 +9,16 @@
         android:id="@+id/textProduto"
         android:layout_width="120dp"
         android:layout_height="26dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_corner"
-        android:text="Produto"
-        android:textAlignment="gravity"
 
+        android:paddingStart="4dp"
+        android:text="Produto"
+        android:textAlignment="textStart"
         android:textSize="20sp"
         android:textStyle="bold"
+        app:autoSizeTextType="uniform"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,7 +28,7 @@
         android:layout_height="26dp"
         android:layout_marginStart="16dp"
         android:background="@drawable/rounded_corner"
-        android:text="2"
+        android:text="100"
         android:textAlignment="center"
         android:textSize="16dp"
         android:textStyle="bold"
@@ -36,11 +38,13 @@
 
     <TextView
         android:id="@+id/textValor"
-        android:layout_width="75dp"
+        android:layout_width="80dp"
         android:layout_height="26dp"
         android:layout_marginStart="16dp"
         android:background="@drawable/rounded_corner"
+        android:paddingStart="4dp"
         android:text="R$ 108.45"
+        android:textAlignment="textStart"
         android:textSize="16dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/textQuantidade"
@@ -51,24 +55,23 @@
         android:id="@+id/btnEditar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnExluir"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintBottom_toBottomOf="@+id/textValor"
+        app:layout_constraintStart_toEndOf="@+id/textValor"
+        app:layout_constraintTop_toTopOf="@+id/textValor"
         app:srcCompat="@drawable/ic_editar_24" />
 
     <ImageButton
-        android:id="@+id/btnExluir"
+        android:id="@+id/btnExcluir"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="4dp"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/btnEditar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/btnEditar"
+        app:layout_constraintTop_toTopOf="@+id/btnEditar"
         app:srcCompat="@drawable/ic_excluir_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.feirafacil.databinding.ActivityAddItemBinding
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class AddItemActivity : AppCompatActivity() {
@@ -16,6 +17,12 @@ class AddItemActivity : AppCompatActivity() {
         FirebaseFirestore.getInstance()
     }
 
+    private val firebaseAuth by lazy {
+        FirebaseAuth.getInstance()
+    }
+
+    private lateinit var usuarioUID : String
+
     private lateinit var produto : String
     private var quantidade : Int = 0
     private var valor : Double = 0.0
@@ -25,6 +32,8 @@ class AddItemActivity : AppCompatActivity() {
         binding = ActivityAddItemBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
+
+        usuarioUID = firebaseAuth.currentUser!!.uid
 
         inicializarEventosClique()
 
@@ -43,13 +52,6 @@ class AddItemActivity : AppCompatActivity() {
                 valor = binding.editPreco.text.toString().toDouble()
                 val valorTotal = quantidade * valor
 
-                /*val dados = mapOf(
-                    "produto" to produto,
-                    "quantidade" to quantidade,
-                    "valor" to valor,
-                    "valorTotal" to valorTotal
-
-                )*/
 
                 val tituloRecebido = intent.getStringExtra("tituloFeira")
                 if (tituloRecebido != null) {
@@ -63,9 +65,13 @@ class AddItemActivity : AppCompatActivity() {
 
                     )
 
-                    firebaseStore.collection(tituloRecebido)
+                    firebaseStore.collection("usuarios")
+                        .document(usuarioUID)
+                        .collection("feiras")
+                        .document(tituloRecebido)
+                        .collection("itens")
                         .add(dados)
-                        .addOnSuccessListener {
+                        .addOnSuccessListener { documentReference ->
                             Toast.makeText(this, "Sucesso ao salvar produto", Toast.LENGTH_LONG)
                                 .show()
                         }.addOnFailureListener { erro ->
@@ -73,9 +79,11 @@ class AddItemActivity : AppCompatActivity() {
                         }
 
                     val intent = Intent(this, NovaFeiraActivity::class.java)
+                    intent.putExtra("source", "ActivityItem")
                     intent.putExtra("tituloFeira", tituloRecebido)
                     intent.action = "ActivityAddItem"
                     startActivity(intent)
+                    finish()
 
                 } else {
                     Toast.makeText(this, "erro ao salvar produto", Toast.LENGTH_LONG).show()
