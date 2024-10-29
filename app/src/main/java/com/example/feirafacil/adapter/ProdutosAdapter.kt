@@ -7,11 +7,12 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.feirafacil.databinding.ItemListaBinding
 import com.example.feirafacil.model.Lista
 
-class ProdutosAdapter( val onClickExcluir: (String) -> Unit ) : Adapter<ProdutosAdapter.ProdutosViewHolder>() {
+class ProdutosAdapter( val onClickExcluir: (String) -> Unit, val onClickEditar: (String) -> Unit ) : Adapter<ProdutosAdapter.ProdutosViewHolder>() {
 
     private var listaProdutos = mutableListOf<Lista>()
     fun adicionarLista( lista: MutableList<Lista>){
         listaProdutos = lista
+
         notifyDataSetChanged()
     }
 
@@ -29,6 +30,9 @@ class ProdutosAdapter( val onClickExcluir: (String) -> Unit ) : Adapter<Produtos
 
             binding.btnExcluir.setOnClickListener {
                 onClickExcluir(produto.idProduto)
+            }
+            binding.btnEditar.setOnClickListener {
+                onClickEditar(produto.idProduto)
             }
 
         }

@@ -14,6 +14,7 @@ import com.example.feirafacil.model.Feira
 import com.example.feirafacil.model.Lista
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 
 class NovaFeiraActivity : AppCompatActivity() {
 
@@ -42,9 +43,16 @@ class NovaFeiraActivity : AppCompatActivity() {
 
         eventosClique()
 
-        produtosAdapter = ProdutosAdapter { documentId ->
+        produtosAdapter = ProdutosAdapter (
+            { documentId ->
             confirmarExclusao(documentId)
-        }
+        },{ idProduto ->
+                val intent = Intent(this, AtualizarItemActivity::class.java)
+                intent.putExtra("idProduto", idProduto)
+                intent.putExtra("tituloFeira", tituloFeira)
+                startActivity(intent)
+
+        })
         binding.rvFeira.adapter = produtosAdapter
         binding.rvFeira.layoutManager = LinearLayoutManager(this)
         binding.rvFeira.addItemDecoration(
@@ -70,8 +78,15 @@ class NovaFeiraActivity : AppCompatActivity() {
             if (data != null) {
                 tituloFeira = data
             }
+        } else if (source == "ActivityAtualizar") {
+            // Dados vieram da ActivityAtualizar
+            Log.i("testefeira", "ActivityItem = $data")
+            if (data != null) {
+                tituloFeira = data
+            }
         }
 
+        inicializarToolbar()
     }
 
 
@@ -89,6 +104,7 @@ class NovaFeiraActivity : AppCompatActivity() {
                     .collection("feiras")
                     .document(tituloFeira)
                     .collection("itens")
+                    .orderBy("timestamp", Query.Direction.ASCENDING)
                     .addSnapshotListener { querySnapshot, error ->
 
 
@@ -173,6 +189,18 @@ class NovaFeiraActivity : AppCompatActivity() {
                 }
             }
 
+        }
+
+    }
+
+    private fun inicializarToolbar() {
+
+        val toolbar = binding.tbNovaFeira
+        setSupportActionBar(toolbar)
+        supportActionBar?.apply {
+            title = ""
+            binding.textTituloNF.text = tituloFeira
+            setDisplayHomeAsUpEnabled(true)
         }
 
     }

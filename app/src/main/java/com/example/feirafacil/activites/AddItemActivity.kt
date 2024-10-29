@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.feirafacil.databinding.ActivityAddItemBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 
 class AddItemActivity : AppCompatActivity() {
@@ -61,7 +62,8 @@ class AddItemActivity : AppCompatActivity() {
                         "quantidade" to quantidade,
                         "valor" to valor,
                         "valorTotal" to valorTotal,
-                        "idFeira" to tituloRecebido
+                        "idFeira" to tituloRecebido,
+                        "timestamp" to FieldValue.serverTimestamp()
 
                     )
 

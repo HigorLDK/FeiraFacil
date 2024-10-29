@@ -11,6 +11,9 @@ import com.example.feirafacil.databinding.ActivityListaFeiraBinding
 import com.example.feirafacil.model.Feira
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class ListaFeiraActivity : AppCompatActivity() {
 
@@ -43,7 +46,6 @@ class ListaFeiraActivity : AppCompatActivity() {
                 intent.putExtra("tituloFeira", feira.nomeFeira)
                 intent.action = "ActivityListaFeira"
                 startActivity(intent)
-                finish()
             }, { idFeira, nomeFeira ->
                 excluirFeira(idFeira, nomeFeira)
             })
@@ -117,6 +119,7 @@ class ListaFeiraActivity : AppCompatActivity() {
             .collection("usuarios")
             .document(usuarioUID)
             .collection("idFeiras")
+            .orderBy("timestamp", Query.Direction.DESCENDING)
             .addSnapshotListener { querySnapshot, error ->
 
                 val listaFeiras = mutableListOf<Feira>()
@@ -128,6 +131,11 @@ class ListaFeiraActivity : AppCompatActivity() {
                     //Transforma os dados recuperados em Objeto
                     val lista = documentSnapshot.toObject(Feira::class.java)
                     lista?.idFeira = documentSnapshot.id
+                    val timestamp = documentSnapshot.getTimestamp("timestamp")
+                    if (timestamp != null) {
+                        lista?.data = timestamp.toDate()
+                    }
+                    //Log.i("feirateste", "$date")
                     if (lista != null) {
                         listaFeiras.add(lista)
 

@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.feirafacil.databinding.ListaFeirarvBinding
 import com.example.feirafacil.model.Feira
 import com.google.api.Context
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class FeiraAdapter(private val onClick: (Feira) -> Unit, private val onClickExcluir : (String, String) -> Unit) : Adapter<FeiraAdapter.FeiraViewHolder>() {
 
@@ -31,6 +33,15 @@ class FeiraAdapter(private val onClick: (Feira) -> Unit, private val onClickExcl
 
             binding.btnExcluirFeira.setOnClickListener {
                onClickExcluir(feira.idFeira, feira.nomeFeira)
+            }
+
+            feira.data?.let { date ->
+
+                val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+                val dataFormatada = dateFormat.format(date)
+
+                binding.textDataFeira.text = dataFormatada
+
             }
 
         }

@@ -13,6 +13,7 @@ import com.example.feirafacil.adapter.FeiraAdapter
 import com.example.feirafacil.databinding.ActivityMainBinding
 import com.example.feirafacil.model.Feira
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 
 class MainActivity : AppCompatActivity() {
@@ -37,11 +38,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
-        usuarioUID = firebaseAuth.currentUser!!.uid
 
         if(firebaseAuth.currentUser == null){
             logarAnonimo()
         }else{
+            usuarioUID = firebaseAuth.currentUser!!.uid
             val currentUser = firebaseAuth.currentUser
             currentUser?.let {
                 val uid = it.uid
@@ -59,16 +60,16 @@ class MainActivity : AppCompatActivity() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Toast.makeText(this, "Sucesso ao realizar login", Toast.LENGTH_SHORT).show()
-                    // Login anônimo bem-sucedido, você pode acessar o UID do usuário
+                    // Login anônimo bem-sucedido, inicializa usuarioUID
                     val user = firebaseAuth.currentUser
                     user?.let {
-                        val uid = it.uid
-                        // Use o UID como necessário
+                        usuarioUID = it.uid
+                        Log.i("uiduser", "$usuarioUID")
+                        // Agora o UID pode ser usado
                     }
                 } else {
-                    // Tratar falhas de autenticação
                     task.exception?.let {
-                        // Lidar com o erro
+                        Toast.makeText(this, "Erro ao realizar login anônimo: ${it.message}", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -126,7 +127,8 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     // Não existe feira com esse título, prosseguir com a criação
                     val dados = mapOf(
-                        "nomeFeira" to nomeFeira
+                        "nomeFeira" to nomeFeira,
+                        "timestamp" to FieldValue.serverTimestamp()
                     )
 
                     firebaseStore.collection("usuarios")

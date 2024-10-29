@@ -18,14 +18,16 @@
         app:srcCompat="@drawable/feira_img" />
 
     <Button
+        style="@style/MyButtonStyle"
         android:id="@+id/btn_NF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:backgroundTint="@android:color/transparent"
         android:drawableTop="@drawable/add_feira"
+        android:fontFamily="sans-serif"
         android:text="NOVA FEIRA"
-        android:textColor="@color/black"
+        android:stateListAnimator="@null"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,13 +37,15 @@
 
     <Button
         android:id="@+id/btn_LF"
+        style="@style/MyButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:backgroundTint="@android:color/transparent"
         android:drawableTop="@drawable/icon_list"
+        android:fontFamily="sans-serif"
         android:text="FEIRAS"
-        android:textColor="@color/black"
+        android:stateListAnimator="@null"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

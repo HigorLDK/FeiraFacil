@@ -19,13 +19,16 @@
             android:exported="false" />
         <activity
             android:name=".activites.AtualizarItemActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".activites.AddItemActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".activites.NovaFeiraActivity"
             android:exported="false"
+            android:parentActivityName=".activites.ListaFeiraActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activites.MainActivity"
@@ -37,6 +40,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

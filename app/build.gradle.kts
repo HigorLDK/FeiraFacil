@@ -42,7 +42,7 @@ android {
 
 dependencies {
 
-    implementation(platform("com.google.firebase:firebase-bom:33.4.0"))//Firebase
+    implementation(platform("com.google.firebase:firebase-bom:33.5.1"))//Firebase
     implementation("com.google.firebase:firebase-analytics")//Analytics
     implementation("com.google.firebase:firebase-firestore-ktx")//Banco de dados
     implementation("com.google.firebase:firebase-auth-ktx")//Autenticação
