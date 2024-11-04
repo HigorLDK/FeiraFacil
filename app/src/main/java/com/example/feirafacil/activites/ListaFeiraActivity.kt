@@ -135,13 +135,13 @@ class ListaFeiraActivity : AppCompatActivity() {
                     if (timestamp != null) {
                         lista?.data = timestamp.toDate()
                     }
-                    //Log.i("feirateste", "$date")
+
                     if (lista != null) {
                         listaFeiras.add(lista)
 
                     }
                 }
-                Log.i("testefeira", "$listaFeiras")
+
                 if (listaFeiras.isNotEmpty()) {
                     feiraAdapter.adicionarFeira(listaFeiras)
                 }else{

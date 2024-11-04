@@ -11,7 +11,6 @@
         android:layout_width="120dp"
         android:layout_height="26dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         android:fontFamily="@font/andada_pro"
         android:paddingStart="4dp"
         android:text="Detergente de Prato"
@@ -19,6 +18,9 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textQuantidade"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,6 +37,8 @@
         android:textStyle="bold"
         app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="@+id/textProduto"
+        app:layout_constraintEnd_toStartOf="@+id/textValor"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textProduto"
         app:layout_constraintTop_toTopOf="@+id/textProduto" />
 
@@ -52,25 +56,28 @@
         android:textStyle="bold"
         app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="@+id/textQuantidade"
+        app:layout_constraintEnd_toStartOf="@+id/btnEditar"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textQuantidade"
         app:layout_constraintTop_toTopOf="@+id/textQuantidade" />
 
     <ImageButton
-        style="@style/MyButtonEditStyle"
         android:id="@+id/btnEditar"
+        style="@style/MyButtonEditStyle"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:background="@drawable/layered_blue"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="@+id/textValor"
+        app:layout_constraintEnd_toStartOf="@+id/btnExcluir"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textValor"
-        app:layout_constraintTop_toTopOf="@+id/textValor"
-        />
+        app:layout_constraintTop_toTopOf="@+id/textValor" />
 
     <ImageButton
-        style="@style/MyButtonDeleteStyle"
         android:id="@+id/btnExcluir"
+        style="@style/MyButtonDeleteStyle"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginEnd="4dp"
@@ -78,8 +85,8 @@
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="@+id/btnEditar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnEditar"
-        app:layout_constraintTop_toTopOf="@+id/btnEditar"
-        />
+        app:layout_constraintTop_toTopOf="@+id/btnEditar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

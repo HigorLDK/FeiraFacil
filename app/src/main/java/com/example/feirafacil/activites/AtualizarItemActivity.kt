@@ -115,6 +115,7 @@ class AtualizarItemActivity : AppCompatActivity() {
                     val intent = Intent(this, NovaFeiraActivity::class.java)
                     intent.putExtra("source", "ActivityAtualizar")
                     intent.putExtra("tituloFeira", tituloFeira)
+                    intent.action = "ActivityAtualizar"
                     startActivity(intent)
                     finish()
                 }

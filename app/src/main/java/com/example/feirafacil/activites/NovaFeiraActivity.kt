@@ -51,6 +51,7 @@ class NovaFeiraActivity : AppCompatActivity() {
                 intent.putExtra("idProduto", idProduto)
                 intent.putExtra("tituloFeira", tituloFeira)
                 startActivity(intent)
+                finish()
 
         })
         binding.rvFeira.adapter = produtosAdapter
@@ -80,7 +81,7 @@ class NovaFeiraActivity : AppCompatActivity() {
             }
         } else if (source == "ActivityAtualizar") {
             // Dados vieram da ActivityAtualizar
-            Log.i("testefeira", "ActivityItem = $data")
+            Log.i("testefeira", "ActivityAtualizar = $data")
             if (data != null) {
                 tituloFeira = data
             }
@@ -182,6 +183,12 @@ class NovaFeiraActivity : AppCompatActivity() {
                     finish()
                 }
                 "ActivityAddItem" -> {
+                    val intent = Intent(this,AddItemActivity::class.java)
+                    intent.putExtra("tituloFeira", tituloFeira)
+                    startActivity(intent)
+                    finish()
+                }
+                "ActivityAtualizar" -> {
                     val intent = Intent(this,AddItemActivity::class.java)
                     intent.putExtra("tituloFeira", tituloFeira)
                     startActivity(intent)

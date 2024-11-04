@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
             val currentUser = firebaseAuth.currentUser
             currentUser?.let {
                 val uid = it.uid
-                Log.i("uiduser", "$uid")
+                Log.i("uiduser", uid)
             }
         }
 
@@ -75,9 +75,6 @@ class MainActivity : AppCompatActivity() {
             }
     }
 
-    override fun onStart() {
-        super.onStart()
-    }
 
     private fun eventosClique() {
 
