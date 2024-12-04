@@ -1,10 +1,8 @@
 package com.example.feirafacil.model
 
 import android.os.Parcelable
-import com.google.firebase.Timestamp
-import com.google.firebase.firestore.ServerTimestamp
 import kotlinx.parcelize.Parcelize
-import java.io.Serializable
+
 import java.util.Date
 
 @Parcelize

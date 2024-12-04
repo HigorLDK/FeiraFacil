@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#7CBDF1</color>
     <color name="green">#7ac777</color>
-    <color name="red">#E61717</color>
+    <color name="red">#E57373</color>
     <color name="orange">#F47D22</color>
+    <color name="cobre">#b87333</color>
+    <color name="cinza">#121212</color>
 
     <color name="primaria">#7ac777</color>
     <color name="primaria_variação">#4BBD46</color>
+    <color name="primaria_variação_noite">#4BBD46</color>
     <color name="cardViewColorDay">#E7E7E7</color>
     <color name="cardViewColorNight">#757575</color>
-
 
 </resources>

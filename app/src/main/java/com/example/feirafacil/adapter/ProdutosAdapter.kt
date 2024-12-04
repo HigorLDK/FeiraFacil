@@ -1,18 +1,24 @@
 package com.example.feirafacil.adapter
 
+import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.example.feirafacil.R
 import com.example.feirafacil.databinding.ItemListaBinding
 import com.example.feirafacil.model.Lista
+import kotlin.coroutines.coroutineContext
 
-class ProdutosAdapter( val onClickExcluir: (String) -> Unit, val onClickEditar: (String) -> Unit ) : Adapter<ProdutosAdapter.ProdutosViewHolder>() {
+class ProdutosAdapter(private val context: Context, val onClickExcluir: (String) -> Unit, val onClickEditar: (String) -> Unit ) : Adapter<ProdutosAdapter.ProdutosViewHolder>() {
 
     private var listaProdutos = mutableListOf<Lista>()
-    fun adicionarLista( lista: MutableList<Lista>){
-        listaProdutos = lista
-
+    // Atualiza a lista de produtos no Adapter
+    fun adicionarLista(novaLista: List<Lista>) {
+        listaProdutos.clear()
+        listaProdutos.addAll(novaLista)
         notifyDataSetChanged()
     }
 
@@ -35,6 +41,21 @@ class ProdutosAdapter( val onClickExcluir: (String) -> Unit, val onClickEditar: 
                 onClickEditar(produto.idProduto)
             }
 
+
+                val textname = binding.textProduto
+                val text = binding.textValor
+                val valor = text.text.toString()
+
+                if (valor == "R$ 0,00"){
+
+                    val color = ContextCompat.getColor(context, R.color.red)
+                    text.setBackgroundColor(color)
+                    textname.setBackgroundColor(color)
+
+                }
+
+
+
         }
 
     }
@@ -55,5 +76,7 @@ class ProdutosAdapter( val onClickExcluir: (String) -> Unit, val onClickEditar: 
         val produto =listaProdutos[position]
         holder.bind(produto)
     }
+
+
 
 }

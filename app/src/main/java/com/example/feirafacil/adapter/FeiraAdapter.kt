@@ -1,22 +1,20 @@
 package com.example.feirafacil.adapter
 
-import android.util.Log
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.feirafacil.databinding.ListaFeirarvBinding
 import com.example.feirafacil.model.Feira
-import com.google.api.Context
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 class FeiraAdapter(private val onClick: (Feira) -> Unit, private val onClickExcluir : (String, String) -> Unit) : Adapter<FeiraAdapter.FeiraViewHolder>() {
 
     private var listaFeira = mutableListOf<Feira>()
-    fun adicionarFeira(lista: MutableList<Feira>){
-        listaFeira = lista
+    fun adicionarFeira(lista: List<Feira>){
+        listaFeira = lista.toMutableList()
         notifyDataSetChanged()
     }
 

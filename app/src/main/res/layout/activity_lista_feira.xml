@@ -5,7 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activites.ListaFeiraActivity">
+    tools:context=".ui.ListaFeiraActivity"
+    android:theme="@style/Base.Theme.FeiraFacil">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvListaFeira"

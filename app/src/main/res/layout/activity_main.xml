@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activites.MainActivity">
+    tools:context=".ui.MainActivity"
+    android:theme="@style/Base.Theme.FeiraFacil">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -15,7 +16,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/feira_img" />
+        app:srcCompat="@drawable/logo03" />
 
     <Button
         style="@style/MyButtonStyle"
@@ -40,12 +41,12 @@
         style="@style/MyButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:backgroundTint="@android:color/transparent"
         android:drawableTop="@drawable/icon_list"
         android:fontFamily="sans-serif"
-        android:text="FEIRAS"
         android:stateListAnimator="@null"
+        android:text="FEIRAS"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
