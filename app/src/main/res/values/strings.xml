@@ -1,6 +1,28 @@
 <resources>
     <string name="app_name">FeiraFacil</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="quantidade">Quantidade</string>
+    <string name="valor_total">R$ 0.000,00</string>
+    <string name="txt_total">Total:</string>
+    <string name="exe_produto">Detergente de Prato</string>
+    <string name="exe_valor">R$ 1008.00</string>
+    <string name="exe_quantidade">100</string>
+    <string name="btn_adicionar_novo_produto">AdicionarProduto</string>
+    <string name="titulo_feira">titulo</string>
+    <string name="produto_add">Produto</string>
+    <string name="quantidade_add">Quantidade</string>
+    <string name="preco_add">Preço</string>
+    <string name="txt_adicionar_produto">Adicionar Produto</string>
+    <string name="btn_adicionar">Adicionar</string>
+    <string name="produto_atualizar">Produto</string>
+    <string name="quantidade_atualizar">Quantidade</string>
+    <string name="preco_atualizar">Preço</string>
+    <string name="txt_alterar_produto">Alterar Produto</string>
+    <string name="btn_atualizar">Atualizar</string>
+    <string name="btn_nova_feira">NOVA FEIRA</string>
+    <string name="btn_feiras">FEIRAS</string>
+    <string name="exe_titulo_feira">feira do mes de novembro</string>
+    <string name="data_feira">00/00/000</string>
+    <string name="btn_excluir">Exluir item</string>
+    <string name="btn_editar">editar item</string>
 </resources>

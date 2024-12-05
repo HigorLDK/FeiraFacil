@@ -55,7 +55,6 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
 
         setupObservers()
-        Log.i("info_firebase", "usuario: $usuarioUID")
 
     }
 
