@@ -2,7 +2,9 @@ package com.example.feirafacil.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -38,6 +40,18 @@ class AtualizarItemActivity : AppCompatActivity() {
 
         inicializarEventosClique()
         viewModel.recuperarProduto(tituloFeira, idProduto)
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                // Criar o Intent para navegar para a outra Activity
+                val intent = Intent(this@AtualizarItemActivity, NovaFeiraActivity::class.java).apply {
+                    putExtra("source", "ActivityAtualizar")
+                    putExtra("tituloFeira", tituloFeira)
+                }
+                startActivity(intent)
+                finish()  // Finalizar a MainActivity
+            }
+        })
 
 
         }
@@ -110,6 +124,7 @@ class AtualizarItemActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
 
 }
 

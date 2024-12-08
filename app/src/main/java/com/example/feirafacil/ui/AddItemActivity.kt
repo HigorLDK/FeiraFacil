@@ -3,6 +3,7 @@ package com.example.feirafacil.ui
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -22,12 +23,28 @@ class AddItemActivity : AppCompatActivity() {
         )
     }
 
+    private lateinit var tituloFeira: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddItemBinding.inflate(layoutInflater)
         installSplashScreen()
         setContentView(binding.root)
         supportActionBar?.hide()
+
+        tituloFeira = intent.getStringExtra("tituloFeira") ?: ""
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                // Criar o Intent para navegar para a outra Activity
+                val intent = Intent(this@AddItemActivity, NovaFeiraActivity::class.java).apply {
+                    putExtra("source", "ActivityAtualizar")
+                    putExtra("tituloFeira", tituloFeira)
+                }
+                startActivity(intent)
+                finish()  // Finalizar a MainActivity
+            }
+        })
 
     }
 
