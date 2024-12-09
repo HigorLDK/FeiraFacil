@@ -1,4 +1,4 @@
-package com.example.feirafacil
+package com.higorapp.feirafacil
 
 object Constants {
 

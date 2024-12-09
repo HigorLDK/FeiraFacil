@@ -1,12 +1,12 @@
-package com.example.feirafacil.adapter
+package com.higorapp.feirafacil.adapter
 
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.feirafacil.databinding.ListaFeirarvBinding
-import com.example.feirafacil.model.Feira
+import com.higorapp.feirafacil.databinding.ListaFeirarvBinding
+import com.higorapp.feirafacil.model.Feira
 import java.text.SimpleDateFormat
 import java.util.Locale
 

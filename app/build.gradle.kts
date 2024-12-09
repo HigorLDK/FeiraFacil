@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.feirafacil"
+    namespace = "com.higorapp.feirafacil"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.feirafacil"
+        applicationId = "com.higorapp.feirafacil"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

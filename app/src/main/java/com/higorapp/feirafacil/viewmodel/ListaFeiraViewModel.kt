@@ -1,12 +1,12 @@
-package com.example.feirafacil.viewmodel
+package com.higorapp.feirafacil.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.feirafacil.model.Feira
-import com.example.feirafacil.repository.FirestoreRepository
+import com.higorapp.feirafacil.model.Feira
+import com.higorapp.feirafacil.repository.FirestoreRepository
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 

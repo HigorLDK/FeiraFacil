@@ -1,16 +1,14 @@
-package com.example.feirafacil.adapter
+package com.higorapp.feirafacil.adapter
 
 import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.example.feirafacil.R
-import com.example.feirafacil.databinding.ItemListaBinding
-import com.example.feirafacil.model.Lista
-import kotlin.coroutines.coroutineContext
+import com.higorapp.feirafacil.R
+import com.higorapp.feirafacil.databinding.ItemListaBinding
+import com.higorapp.feirafacil.model.Lista
 
 class ProdutosAdapter(private val context: Context, val onClickExcluir: (String) -> Unit, val onClickEditar: (String) -> Unit ) : Adapter<ProdutosAdapter.ProdutosViewHolder>() {
 

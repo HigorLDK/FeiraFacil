@@ -1,4 +1,4 @@
-package com.example.feirafacil.ui
+package com.higorapp.feirafacil.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,9 +7,9 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.example.feirafacil.databinding.ActivityAddItemBinding
-import com.example.feirafacil.repository.FirestoreRepository
-import com.example.feirafacil.viewmodel.AddItemViewModel
+import com.higorapp.feirafacil.databinding.ActivityAddItemBinding
+import com.higorapp.feirafacil.repository.FirestoreRepository
+import com.higorapp.feirafacil.viewmodel.AddItemViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 class AddItemActivity : AppCompatActivity() {
@@ -74,6 +74,7 @@ class AddItemActivity : AppCompatActivity() {
     private fun validarCampos(): Boolean {
         val produto = binding.editProduto.text.toString()
         val quantidadeTexto = binding.editQuantidade.text.toString()
+        val valor = binding.editPreco.text.toString()
 
         return when {
             produto.isEmpty() -> {
@@ -82,6 +83,10 @@ class AddItemActivity : AppCompatActivity() {
             }
             quantidadeTexto.isEmpty() || quantidadeTexto.toIntOrNull() == null || quantidadeTexto.toInt() <= 0 -> {
                 binding.editQuantidade.error = "Preencha uma quantidade válida!"
+                false
+            }
+            valor.isEmpty() || valor.toIntOrNull() == null -> {
+                binding.editPreco.error = "Preencha o preço!"
                 false
             }
             else -> true

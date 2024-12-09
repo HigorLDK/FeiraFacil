@@ -1,18 +1,17 @@
-package com.example.feirafacil.ui
+package com.higorapp.feirafacil.ui
 
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.EditText
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.example.feirafacil.R
-import com.example.feirafacil.databinding.ActivityMainBinding
-import com.example.feirafacil.viewmodel.MainViewModel
+import com.higorapp.feirafacil.R
+import com.higorapp.feirafacil.databinding.ActivityMainBinding
+import com.higorapp.feirafacil.viewmodel.MainViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {

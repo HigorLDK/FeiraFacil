@@ -1,4 +1,4 @@
-package com.example.feirafacil.ui
+package com.higorapp.feirafacil.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,11 +9,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.feirafacil.R
-import com.example.feirafacil.adapter.ProdutosAdapter
-import com.example.feirafacil.databinding.ActivityNovaFeiraBinding
-import com.example.feirafacil.repository.FirestoreRepository
-import com.example.feirafacil.viewmodel.NovaFeiraViewModel
+import com.higorapp.feirafacil.R
+import com.higorapp.feirafacil.adapter.ProdutosAdapter
+import com.higorapp.feirafacil.databinding.ActivityNovaFeiraBinding
+import com.higorapp.feirafacil.repository.FirestoreRepository
+import com.higorapp.feirafacil.viewmodel.NovaFeiraViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 

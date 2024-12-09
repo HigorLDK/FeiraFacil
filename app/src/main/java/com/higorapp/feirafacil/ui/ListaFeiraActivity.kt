@@ -1,4 +1,4 @@
-package com.example.feirafacil.ui
+package com.higorapp.feirafacil.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,10 +8,10 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.feirafacil.adapter.FeiraAdapter
-import com.example.feirafacil.databinding.ActivityListaFeiraBinding
-import com.example.feirafacil.repository.FirestoreRepository
-import com.example.feirafacil.viewmodel.ListaFeiraViewModel
+import com.higorapp.feirafacil.adapter.FeiraAdapter
+import com.higorapp.feirafacil.databinding.ActivityListaFeiraBinding
+import com.higorapp.feirafacil.repository.FirestoreRepository
+import com.higorapp.feirafacil.viewmodel.ListaFeiraViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 class ListaFeiraActivity : AppCompatActivity() {

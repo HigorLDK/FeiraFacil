@@ -1,4 +1,4 @@
-package com.example.feirafacil.repository
+package com.higorapp.feirafacil.repository
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser

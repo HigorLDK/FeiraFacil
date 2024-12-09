@@ -1,7 +1,7 @@
-package com.example.feirafacil.repository
+package com.higorapp.feirafacil.repository
 
 import android.util.Log
-import com.example.feirafacil.model.Lista
+import com.higorapp.feirafacil.model.Lista
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore

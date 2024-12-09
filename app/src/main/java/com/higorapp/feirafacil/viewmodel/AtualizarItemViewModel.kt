@@ -1,12 +1,12 @@
-package com.example.feirafacil.viewmodel
+package com.higorapp.feirafacil.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.feirafacil.Constants
-import com.example.feirafacil.model.Lista
-import com.example.feirafacil.repository.FirestoreRepository
+import com.higorapp.feirafacil.Constants
+import com.higorapp.feirafacil.model.Lista
+import com.higorapp.feirafacil.repository.FirestoreRepository
 
 class AtualizarItemViewModel(
     private val repository: FirestoreRepository,

@@ -1,4 +1,4 @@
-package com.example.feirafacil.model
+package com.higorapp.feirafacil.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

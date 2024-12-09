@@ -1,4 +1,4 @@
-package com.example.feirafacil.model
+package com.higorapp.feirafacil.model
 
 import java.io.Serializable
 
