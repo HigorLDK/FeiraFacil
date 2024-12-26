@@ -61,7 +61,11 @@ class ListaFeiraActivity : AppCompatActivity() {
 
     private fun setupObservers() {
         viewModel.feiras.observe(this) { feiras ->
-            feiraAdapter.adicionarFeira(feiras)
+            if (feiras.isNullOrEmpty()) {
+                Toast.makeText(this, "Nenhuma feira disponível", Toast.LENGTH_LONG).show()
+            } else {
+                feiraAdapter.adicionarFeira(feiras)
+            }
         }
 
         viewModel.exclusaoEstado.observe(this) { result ->

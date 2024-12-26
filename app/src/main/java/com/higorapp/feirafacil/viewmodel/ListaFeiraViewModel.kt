@@ -1,5 +1,6 @@
 package com.higorapp.feirafacil.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -32,6 +33,14 @@ class ListaFeiraViewModel(
                     feira?.data = documentSnapshot.getTimestamp("timestamp")?.toDate()
                     feira?.let { listaFeiras.add(it) }
                 }
+
+                // Adicione o log aqui para verificar o tamanho da lista
+                if (listaFeiras.isEmpty()) {
+                    Log.i("ListaFeiraViewModel", "Nenhuma feira encontrada na primeira execução.")
+                } else {
+                    Log.i("ListaFeiraViewModel", "${listaFeiras.size} feiras encontradas na primeira execução.")
+                }
+
                 _feiras.postValue(listaFeiras)
             }
     }

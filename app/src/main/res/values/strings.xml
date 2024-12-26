@@ -25,4 +25,5 @@
     <string name="data_feira">00/00/000</string>
     <string name="btn_excluir">Exluir item</string>
     <string name="btn_editar">editar item</string>
+    <string name="Aviso">AVISO: Digite o ponto para casas decimais</string>
 </resources>

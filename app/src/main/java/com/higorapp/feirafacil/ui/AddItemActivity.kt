@@ -85,7 +85,7 @@ class AddItemActivity : AppCompatActivity() {
                 binding.editQuantidade.error = "Preencha uma quantidade válida!"
                 false
             }
-            valor.isEmpty() || valor.toIntOrNull() == null -> {
+            valor.isEmpty() || valor.toDoubleOrNull() == null -> {
                 binding.editPreco.error = "Preencha o preço!"
                 false
             }

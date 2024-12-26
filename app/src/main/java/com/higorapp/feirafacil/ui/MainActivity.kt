@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -21,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels { MainViewModel.Factory }
 
     private lateinit var usuarioUID: String
-    private lateinit var tituloFeira: String
+    private var tituloFeira: String = ""
 
     private var isFeiraSalva = false // Flag para controlar a navegação
 
@@ -100,7 +101,11 @@ class MainActivity : AppCompatActivity() {
             alertBuilder.setPositiveButton("Salvar") { _, _ ->
                 tituloFeira = editText.text.toString()
                 isFeiraSalva = false // Resetando o flag antes de tentar salvar a feira
-                viewModel.salvarIdFeira(usuarioUID, tituloFeira)
+                if (tituloFeira.isEmpty()) {
+                    Toast.makeText(this,"Digite um título valido", Toast.LENGTH_SHORT).show()
+                }else{
+                    viewModel.salvarIdFeira(usuarioUID, tituloFeira)
+                }
 
             }
             alertBuilder.setNegativeButton("Cancelar") { _, _ -> }
