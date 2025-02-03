@@ -15,6 +15,6 @@
     <color name="primaria_variação_noite">#4BBD46</color>
     <color name="cardViewColorDay">#E7E7E7</color>
     <color name="cardViewColorNight">#757575</color>
-    <color name="colorDefault">#D1D1D1</color>
+    <color name="colorDefault">#575757</color>
 
 </resources>

@@ -58,7 +58,12 @@ class AddItemActivity : AppCompatActivity() {
             if (validarCampos()) {
                 val produto = binding.editProduto.text.toString()
                 val quantidade = binding.editQuantidade.text.toString().toInt()
-                val valor = binding.editPreco.text.toString().toDouble()
+                // Se o campo de preço estiver vazio ou inválido, atribui 0.0
+                val valor = if (binding.editPreco.text.toString().isEmpty()) {
+                    0.0
+                } else {
+                    binding.editPreco.text.toString().toDouble()
+                }
                 val tituloRecebido = intent.getStringExtra("tituloFeira")
 
                 if (!tituloRecebido.isNullOrEmpty()) {
@@ -74,7 +79,7 @@ class AddItemActivity : AppCompatActivity() {
     private fun validarCampos(): Boolean {
         val produto = binding.editProduto.text.toString()
         val quantidadeTexto = binding.editQuantidade.text.toString()
-        val valor = binding.editPreco.text.toString()
+        //val valor = binding.editPreco.text.toString()
 
         return when {
             produto.isEmpty() -> {
@@ -83,10 +88,6 @@ class AddItemActivity : AppCompatActivity() {
             }
             quantidadeTexto.isEmpty() || quantidadeTexto.toIntOrNull() == null || quantidadeTexto.toInt() <= 0 -> {
                 binding.editQuantidade.error = "Preencha uma quantidade válida!"
-                false
-            }
-            valor.isEmpty() || valor.toDoubleOrNull() == null -> {
-                binding.editPreco.error = "Preencha o preço!"
                 false
             }
             else -> true

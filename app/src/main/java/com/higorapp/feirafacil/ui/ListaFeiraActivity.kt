@@ -21,11 +21,14 @@ class ListaFeiraActivity : AppCompatActivity() {
     private lateinit var feiraAdapter: FeiraAdapter
 
     private val firebaseAuth by lazy { FirebaseAuth.getInstance() }
-    private val usuarioUID: String by lazy { firebaseAuth.currentUser!!.uid }
+    private val usuarioUID: String? by lazy { firebaseAuth.currentUser?.uid }
 
     private val viewModel: ListaFeiraViewModel by viewModels {
-        ListaFeiraViewModel.ListaFeiraViewModelFactory(FirestoreRepository(), usuarioUID)
+        usuarioUID?.let { uid ->
+            ListaFeiraViewModel.ListaFeiraViewModelFactory(FirestoreRepository(), uid)
+        } ?: throw IllegalStateException("Usuário não autenticado")
     }
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +48,11 @@ class ListaFeiraActivity : AppCompatActivity() {
                 }
                 startActivity(intent)
             },
-            { idFeira, nomeFeira -> viewModel.excluirFeira(usuarioUID, idFeira, nomeFeira) }
+            { idFeira, nomeFeira ->
+                usuarioUID?.let { uid ->
+                    viewModel.excluirFeira(uid, idFeira, nomeFeira)
+                }
+            }
         )
         binding.rvListaFeira.adapter = feiraAdapter
         binding.rvListaFeira.layoutManager = LinearLayoutManager(this)
@@ -62,7 +69,8 @@ class ListaFeiraActivity : AppCompatActivity() {
     private fun setupObservers() {
         viewModel.feiras.observe(this) { feiras ->
             if (feiras.isNullOrEmpty()) {
-                Toast.makeText(this, "Nenhuma feira disponível", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Nenhuma feira disponível", Toast.LENGTH_SHORT).show()
+                feiraAdapter.adicionarFeira(emptyList())
             } else {
                 feiraAdapter.adicionarFeira(feiras)
             }
@@ -72,6 +80,7 @@ class ListaFeiraActivity : AppCompatActivity() {
             result.onSuccess {
                 Log.i("info_feira", "$result")
                 //Toast.makeText(this, "Feira e itens excluídos com sucesso", Toast.LENGTH_LONG).show()
+                viewModel.recuperarFeiras()
             }.onFailure { error ->
                 Toast.makeText(this, "Erro ao excluir: ${error.message}", Toast.LENGTH_LONG).show()
             }

@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity() {
             usuarioUID = FirebaseAuth.getInstance().currentUser!!.uid
         }
 
+        setupObservers()
         eventosClique()
 
 
@@ -53,8 +54,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-
-        setupObservers()
 
     }
 
@@ -83,8 +82,8 @@ class MainActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
             }.onFailure { error ->
-                Log.i("info_feira", "Erro feira já existe")
-                //Toast.makeText(this, error.message, Toast.LENGTH_LONG).show()
+                //Log.i("info_feira", "Erro feira já existe: $error")
+                Toast.makeText(this, error.message, Toast.LENGTH_SHORT).show()
             }
         }
 

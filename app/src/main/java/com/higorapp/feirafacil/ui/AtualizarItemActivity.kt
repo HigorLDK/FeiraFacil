@@ -80,16 +80,20 @@ class AtualizarItemActivity : AppCompatActivity() {
     }
 
     private fun inicializarEventosClique() {
-        binding.btnSalvar.setOnClickListener {
+        binding.btnAtualizar.setOnClickListener {
             val produto = binding.editProduto2.text.toString()
-            val quantidade = binding.editQuant2.text.toString().toIntOrNull()
-            val valor = binding.editPreco2.text.toString().toDoubleOrNull()
+            val quantidadeTexo = binding.editQuant2.text.toString()
+            val valorTexto = binding.editPreco2.text.toString()
 
-            if (validarCampos(produto, quantidade, valor)) {
+            if (validarCampos(produto, quantidadeTexo, valorTexto)) {
+
+                val quantidade = quantidadeTexo.toInt()
+                val valor = valorTexto.toDouble()
+
                 val dados = mapOf(
                     "produto" to produto,
-                    "quantidade" to quantidade!!,
-                    "valor" to valor!!,
+                    "quantidade" to quantidade,
+                    "valor" to valor,
                     "valorTotal" to (quantidade * valor)
                 )
                 viewModel.atualizarProduto(tituloFeira, idProduto, dados)
@@ -97,17 +101,17 @@ class AtualizarItemActivity : AppCompatActivity() {
         }
     }
 
-    private fun validarCampos(produto: String, quantidade: Int?, valor: Double?): Boolean {
+    private fun validarCampos(produto: String, quantidade: String, valor: String): Boolean {
         return when {
             produto.isEmpty() -> {
                 binding.editProduto2.error = "Preencha um produto!"
                 false
             }
-            quantidade == null || quantidade <= 0 -> {
+            quantidade.isEmpty() || quantidade.toIntOrNull() == null || quantidade.toInt() <= 0 -> {
                 binding.editQuant2.error = "Preencha uma quantidade válida!"
                 false
             }
-            valor == null || valor <= 0.0 -> {
+            valor.isEmpty() || valor.toDoubleOrNull() == null -> {
                 binding.editPreco2.error = "Preencha um valor válido!"
                 false
             }
