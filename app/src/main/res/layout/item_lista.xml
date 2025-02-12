@@ -67,9 +67,10 @@
     <ImageButton
         android:id="@+id/btnEditar"
         style="@style/MyButtonEditStyle"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="3dp"
         android:background="@drawable/layered_blue"
         android:contentDescription="@string/btn_editar"
         android:minHeight="48dp"
@@ -78,13 +79,14 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textValor"
         app:layout_constraintTop_toTopOf="@+id/textValor"
-        tools:ignore="ImageContrastCheck" />
+        tools:ignore="ImageContrastCheck"
+        tools:src="@drawable/ic_editar_24" />
 
     <ImageButton
         android:id="@+id/btnExcluir"
         style="@style/MyButtonDeleteStyle"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/layered_red"
@@ -94,6 +96,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/btnEditar"
-        app:layout_constraintTop_toTopOf="@+id/btnEditar" />
+        app:layout_constraintTop_toTopOf="@+id/btnEditar"
+        tools:src="@drawable/ic_excluir_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

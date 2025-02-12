@@ -10,7 +10,7 @@
     <EditText
         android:id="@+id/editProduto"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginTop="12dp"
         android:autofillHints="Produtos"
         android:ems="10"
@@ -24,7 +24,7 @@
     <EditText
         android:id="@+id/editQuantidade"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginTop="16dp"
         android:autofillHints="Quantidade"
         android:ems="10"
@@ -38,7 +38,7 @@
     <EditText
         android:id="@+id/editPreco"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:autofillHints="Preço"
@@ -71,6 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/btn_adicionar"
+        android:textColor="@color/cinza_night"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

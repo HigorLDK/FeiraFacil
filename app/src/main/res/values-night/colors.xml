@@ -9,12 +9,13 @@
     <color name="orange">#F47D22</color>
     <color name="cobre">#b87333</color>
     <color name="cinza">#121212</color>
+    <color name="cinza_night">#333333</color>
 
     <color name="primaria">#7ac777</color>
     <color name="primaria_variação">#4BBD46</color>
     <color name="primaria_variação_noite">#4BBD46</color>
     <color name="cardViewColorDay">#E7E7E7</color>
-    <color name="cardViewColorNight">#757575</color>
+    <color name="cardViewColorNight">#333333</color>
     <color name="colorDefault">#575757</color>
 
 </resources>

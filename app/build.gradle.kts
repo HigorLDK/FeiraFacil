@@ -13,8 +13,8 @@ android {
         applicationId = "com.higorapp.feirafacil"
         minSdk = 24
         targetSdk = 34
-        versionCode = 7
-        versionName = "1.0.4"
+        versionCode = 13
+        versionName = "1.0.10"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

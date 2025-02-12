@@ -29,11 +29,11 @@
     </style>
 
     <style name="MyButtonEditStyle" parent="Widget.MaterialComponents.TimePicker.ImageButton">
-        <item name="srcCompat">@drawable/ic_editar_25</item>
+        <item name="srcCompat">@drawable/ic_editar_24</item>
     </style>
 
     <style name="MyButtonDeleteStyle" parent="Widget.MaterialComponents.TimePicker.ImageButton">
-        <item name="srcCompat">@drawable/ic_excluir_25</item>
+        <item name="srcCompat">@drawable/ic_excluir_24</item>
     </style>
 
     <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">

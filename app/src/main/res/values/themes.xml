@@ -38,7 +38,7 @@
     <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:background">@color/cardViewColorDay</item>
         <item name="android:textColorPrimary">@color/black</item>
-        <item name="android:textColor">@color/primaria</item> <!-- Cor do texto -->
+        <item name="android:textColor">@color/primaria_variação</item> <!-- Cor do texto -->
     </style>
 
     <style name="Theme.FeiraFacil" parent="Base.Theme.FeiraFacil" />

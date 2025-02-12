@@ -9,7 +9,7 @@
     <EditText
         android:id="@+id/editProduto2"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="@string/produto_atualizar"
@@ -22,7 +22,7 @@
     <EditText
         android:id="@+id/editQuant2"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/quantidade_atualizar"
@@ -35,7 +35,7 @@
     <EditText
         android:id="@+id/editPreco2"
         android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/preco_atualizar"
@@ -65,6 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/btn_atualizar"
+        android:textColor="@color/cinza_night"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
