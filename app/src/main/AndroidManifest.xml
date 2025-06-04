@@ -16,14 +16,7 @@
         tools:targetApi="31">
         <activity
             android:name=".ui.ListaFeiraActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.AtualizarItemActivity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
-        <activity
-            android:name=".ui.AddItemActivity"
-            android:screenOrientation="portrait"
+            android:parentActivityName=".ui.MainActivity"
             android:exported="false" />
         <activity
             android:name=".ui.NovaFeiraActivity"

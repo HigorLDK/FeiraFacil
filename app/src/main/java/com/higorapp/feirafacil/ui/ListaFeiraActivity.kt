@@ -1,6 +1,8 @@
 package com.higorapp.feirafacil.ui
 
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -32,6 +34,8 @@ class ListaFeiraActivity : AppCompatActivity() {
         installSplashScreen()
         setContentView(binding.root)
         supportActionBar?.hide()
+
+        setupToolbar()
 
         usuarioUID = firebaseAuth.currentUser?.uid
         if (usuarioUID == null) {
@@ -111,6 +115,14 @@ class ListaFeiraActivity : AppCompatActivity() {
             }.onFailure { error ->
                 Toast.makeText(this, "Erro ao excluir: ${error.message}", Toast.LENGTH_LONG).show()
             }
+        }
+    }
+
+    private fun setupToolbar() {
+        setSupportActionBar(binding.tbListaFeira)
+        supportActionBar?.apply {
+            title = "Lista de Feiras"
+            setDisplayHomeAsUpEnabled(true)
         }
     }
 }

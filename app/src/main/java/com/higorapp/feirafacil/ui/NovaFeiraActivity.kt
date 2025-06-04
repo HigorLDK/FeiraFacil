@@ -1,13 +1,19 @@
 package com.higorapp.feirafacil.ui
 
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.Gravity
+import android.view.View
+import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.higorapp.feirafacil.R
 import com.higorapp.feirafacil.adapter.ProdutosAdapter
@@ -15,6 +21,10 @@ import com.higorapp.feirafacil.databinding.ActivityNovaFeiraBinding
 import com.higorapp.feirafacil.repository.FirestoreRepository
 import com.higorapp.feirafacil.viewmodel.NovaFeiraViewModel
 import com.google.firebase.auth.FirebaseAuth
+import com.higorapp.feirafacil.fragments.AddItemBottomSheetFragment
+import com.higorapp.feirafacil.fragments.EditValorBootmShhetFragment
+import com.higorapp.feirafacil.fragments.EditProdutoBootmShhetFragment
+
 
 
 class NovaFeiraActivity : AppCompatActivity() {
@@ -42,6 +52,14 @@ class NovaFeiraActivity : AppCompatActivity() {
         tituloFeira = intent.getStringExtra("tituloFeira") ?: ""
         eventosClique()
 
+        Log.i("testefrag","onCreate")
+
+        supportFragmentManager.setFragmentResultListener("atualizarProdutos", this) { _, bundle ->
+            if (bundle.getBoolean("atualizarLista")) {
+                viewModel.recuperarProdutos() // Atualiza a lista
+            }
+        }
+
     }
 
 
@@ -56,31 +74,52 @@ class NovaFeiraActivity : AppCompatActivity() {
 
     }
 
+
+
     private fun setupRecyclerView() {
         produtosAdapter = ProdutosAdapter(context = this,
             { documentId -> confirmarExclusao(documentId) },
             { idProduto ->
-                val intent = Intent(this, AtualizarItemActivity::class.java).apply {
-                    putExtra("idProduto", idProduto)
-                    putExtra("tituloFeira", tituloFeira)
+                val bottomSheetFragment = EditValorBootmShhetFragment().apply {
+                    arguments = Bundle().apply {
+                        putString("tituloFeira", tituloFeira)
+                        putString("idProduto", idProduto)
+                    }
                 }
-                startActivity(intent)
-                finish()
+                bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+            },{ idProduto ->
+                val bottomSheetFragment = EditProdutoBootmShhetFragment().apply {
+                    arguments = Bundle().apply {
+                        putString("tituloFeira", tituloFeira)
+                        putString("idProduto", idProduto)
+                    }
+                }
+                bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+            },{ idProduto->
+                viewModel.incrementarQuantidade(tituloFeira,idProduto)
+            },{idProduto ->
+                viewModel.decrementarQuantidade(tituloFeira,idProduto)
             }
         )
         binding.rvFeira.apply {
             adapter = produtosAdapter
             layoutManager = LinearLayoutManager(this@NovaFeiraActivity)
-            addItemDecoration(DividerItemDecoration(this@NovaFeiraActivity, LinearLayoutManager.VERTICAL))
         }
     }
 
     private fun setupObservers() {
         viewModel.produtos.observe(this) { produtos ->
-            produtosAdapter.adicionarLista(produtos)
+
+            // Ordena os produtos de acordo com a categoria
+            val categoriasOrdenadas = listOf("Alimentos", "Limpeza", "Higiene", "Outros")
+            val produtosOrdenados = produtos.sortedBy { categoriasOrdenadas.indexOf(it.categoria ?: "Outros") }
+
+
+            produtosAdapter.adicionarLista(produtosOrdenados)
         }
 
         viewModel.valorTotal.observe(this) { valorTotal ->
+            Log.i("ValorTotal", "Valor total atualizado: $valorTotal")
             binding.textValorTotal.text = String.format("R$ %,.2f", valorTotal)
         }
 
@@ -113,14 +152,37 @@ class NovaFeiraActivity : AppCompatActivity() {
 
         binding.btnAdd.setOnClickListener {
 
-            val intent = Intent(this, AddItemActivity::class.java)
-            intent.putExtra("tituloFeira", tituloFeira)
-            startActivity(intent)
-            finish()
+            val bottomSheetFragment = AddItemBottomSheetFragment().apply {
+                arguments = Bundle().apply {
+                    putString("tituloFeira", tituloFeira)
+                }
+            }
+            bottomSheetFragment.show(supportFragmentManager, bottomSheetFragment.tag)
+
+
+
+        }
+
+        binding.btnZerar.setOnClickListener {
+           val usuarioUID =  FirebaseAuth.getInstance().currentUser!!.uid
+            // Criar o AlertDialog
+
+            AlertDialog.Builder(this,R.style.CustomAlertDialog)
+                .setTitle("Zerar Preços")
+                .setMessage("Tem certeza que deseja zerar todos os preços dos itens?")
+                .setPositiveButton("Sim") { _, _ ->
+                    // Chama a função para zerar os valores e recarregar os produtos
+                    viewModel.zerarValoresItens(usuarioUID, tituloFeira)
+                }
+                .setNegativeButton("Não", null) // Não faz nada se "Não" for clicado
+                .show()
+
 
         }
 
     }
+
+
 
 }
 

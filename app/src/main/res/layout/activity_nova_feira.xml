@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/idCl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="0dp"
@@ -12,20 +13,18 @@
         android:id="@+id/rvFeira"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tbNovaFeira"
-        tools:listitem="@layout/item_lista" />
+        tools:listitem="@layout/item_lista2" />
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="60dp"
-        android:background="@color/primaria_variação"
+        android:src="@drawable/toolbar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -34,61 +33,59 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="180dp"
-        android:fontFamily="@font/andada_pro"
+        android:fontFamily="@font/inter_bold"
         android:text="@string/txt_total"
-        android:textSize="20sp"
+        android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.515" />
+        app:layout_constraintBottom_toTopOf="@+id/textValorTotal"
+        app:layout_constraintEnd_toEndOf="@+id/textValorTotal"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textValorTotal" />
 
     <TextView
         android:id="@+id/textValorTotal"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="8dp"
-        android:fontFamily="@font/andada_pro"
-        android:maxLines="1"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/inter_bold"
         android:gravity="center"
+        android:maxLines="1"
         android:text="@string/valor_total"
-        android:textAlignment="center"
+        android:textAlignment="viewStart"
         android:textSize="20sp"
         android:textStyle="bold"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAdd"
+        style="@style/MyActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:contentDescription="@string/btn_adicionar_novo_produto"
         android:focusable="true"
-        app:backgroundTint="@color/cobre"
+        app:backgroundTint="@color/action_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.954"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.875"
+        app:rippleColor="@color/white"
         app:srcCompat="@drawable/add_feira" />
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/tbNovaFeira"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/primaria_variação"
+        android:background="@drawable/toolbar"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -97,7 +94,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:fontFamily="casual"
+        android:fontFamily="sans-serif"
         android:text="@string/titulo_feira"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -114,5 +111,16 @@
         app:layout_constraintStart_toStartOf="@+id/tbNovaFeira"
         app:layout_constraintTop_toTopOf="@+id/tbNovaFeira"
         app:srcCompat="@drawable/produto001" />
+
+    <ImageButton
+        android:id="@+id/btnZerar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/rvFeira"
+        app:srcCompat="@drawable/btn_zerar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

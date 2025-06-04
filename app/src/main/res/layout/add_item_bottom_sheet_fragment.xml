@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:theme="@style/Base.Theme.FeiraFacil">
 
@@ -11,7 +11,7 @@
         android:id="@+id/editProduto"
         android:layout_width="300dp"
         android:layout_height="48dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:autofillHints="Produtos"
         android:ems="10"
         android:hint="@string/produto_add"
@@ -19,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCategorias" />
 
     <EditText
         android:id="@+id/editQuantidade"
@@ -56,11 +56,11 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="96dp"
         android:text="@string/txt_adicionar_produto"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -70,24 +70,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
         android:text="@string/btn_adicionar"
-        android:textColor="@color/cinza_night"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editPreco" />
+        app:layout_constraintTop_toBottomOf="@+id/editPreco"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:text="@string/Aviso"
-        android:textSize="16sp"
-        android:textStyle="bold"
+    <Spinner
+        android:id="@+id/spinnerCategorias"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAdicionar" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

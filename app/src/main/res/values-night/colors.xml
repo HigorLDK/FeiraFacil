@@ -8,12 +8,16 @@
     <color name="red">#E57373</color>
     <color name="orange">#F47D22</color>
     <color name="cobre">#b87333</color>
-    <color name="cinza">#121212</color>
-    <color name="cinza_night">#333333</color>
+    <color name="cinza">#A49D9D</color>
+    <color name="cinza_night">#C8C8C8</color>
+
+    <color name="action_button">@color/primaria_noite</color>
+    <color name="text">@color/white</color>
 
     <color name="primaria">#7ac777</color>
-    <color name="primaria_variação">#4BBD46</color>
-    <color name="primaria_variação_noite">#4BBD46</color>
+    <color name="primaria_variação">#14EA74</color>
+    <color name="primaria_noite">#1EAF16</color>
+    <color name="primaria_variação_noite">#00692F</color>
     <color name="cardViewColorDay">#E7E7E7</color>
     <color name="cardViewColorNight">#333333</color>
     <color name="colorDefault">#575757</color>

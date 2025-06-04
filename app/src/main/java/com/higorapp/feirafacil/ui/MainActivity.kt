@@ -14,6 +14,9 @@ import com.higorapp.feirafacil.R
 import com.higorapp.feirafacil.databinding.ActivityMainBinding
 import com.higorapp.feirafacil.viewmodel.MainViewModel
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreSettings
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,7 +35,6 @@ class MainActivity : AppCompatActivity() {
         installSplashScreen()
         setContentView(binding.root)
         supportActionBar?.hide()
-
 
         if (FirebaseAuth.getInstance().currentUser == null) {
             viewModel.logarAnonimo()
@@ -77,7 +79,7 @@ class MainActivity : AppCompatActivity() {
                     isFeiraSalva = true // Marca que a feira foi salva
 
 
-                    val intent = Intent(this, AddItemActivity::class.java)
+                    val intent = Intent(this, NovaFeiraActivity::class.java)
                     intent.putExtra("tituloFeira", tituloFeira)
                     startActivity(intent)
                 }

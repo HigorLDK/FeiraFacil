@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:theme="@style/Base.Theme.FeiraFacil">
+
+    <ImageButton
+        android:id="@+id/btnExcluir"
+        style="@style/MyButtonDeleteStyle"
+        android:layout_width="48dp"
+        android:layout_height="57dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/layered_red"
+        android:contentDescription="@string/btn_excluir"
+        android:elevation="10dp"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/cardView"
+        tools:src="@drawable/ic_excluir" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView"
+        style="@style/MyCardViewStyle"
+        android:layout_width="0dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="7dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnExcluir"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/black">
+
+            <TextView
+                android:id="@+id/textProduto"
+                android:layout_width="100dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/inter_bold"
+                android:paddingEnd="0dp"
+                android:text="@string/exe_produto"
+                android:textAlignment="textStart"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textQuantidade"
+                android:layout_width="30dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/exe_quantidade"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toBottomOf="@+id/btnSubQuantidade"
+                app:layout_constraintStart_toEndOf="@+id/btnSubQuantidade"
+                app:layout_constraintTop_toTopOf="@+id/btnSubQuantidade" />
+
+            <TextView
+                android:id="@+id/textValor"
+                android:layout_width="100dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/inter_bold"
+                android:paddingEnd="9dp"
+                android:text="@string/exe_valor"
+                android:textAlignment="textStart"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toBottomOf="@+id/btnAddQuantidade"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/btnAddQuantidade"
+                app:layout_constraintTop_toTopOf="@+id/btnAddQuantidade" />
+
+            <TextView
+                android:id="@+id/textCategoria"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                android:text="Alimento"
+                android:textColor="@color/cinza"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toTopOf="@+id/textProduto"
+                app:layout_constraintEnd_toEndOf="@+id/textProduto"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/textProduto"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <ImageButton
+                android:id="@+id/btnAddQuantidade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintBottom_toBottomOf="@+id/textQuantidade"
+                app:layout_constraintStart_toEndOf="@+id/textQuantidade"
+                app:layout_constraintTop_toTopOf="@+id/textQuantidade"
+                app:srcCompat="@drawable/add_circle" />
+
+            <ImageButton
+                android:id="@+id/btnSubQuantidade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:background="@android:color/transparent"
+                app:layout_constraintBottom_toBottomOf="@+id/textProduto"
+                app:layout_constraintStart_toEndOf="@+id/textProduto"
+                app:layout_constraintTop_toTopOf="@+id/textProduto"
+                app:srcCompat="@drawable/sub_circle" />
+
+            <TextView
+                android:id="@+id/textValorUnitario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                android:text="R$ 6,15"
+                android:textColor="@color/cinza"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toTopOf="@+id/textValor"
+                app:layout_constraintEnd_toEndOf="@+id/textValor"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/textValor" />
+
+            <ImageView
+                android:id="@+id/imageCategoria"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/borda_inferior" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,7 +23,11 @@ class FeiraAdapter(private val onClick: (Feira) -> Unit, private val onClickExcl
 
         fun bind(feira : Feira){
 
-            binding.textTituloFeira.text = feira.nomeFeira
+            // Formatar o nome do produto para que a primeira letra de cada palavra fique maiúscula
+            val nomeFormatado = feira.nomeFeira.lowercase().split(" ")
+                .joinToString(" ") { it.replaceFirstChar { char -> char.uppercaseChar() } }
+
+            binding.textTituloFeira.text = nomeFormatado
 
             binding.clFeira.setOnClickListener {
                 onClick(feira)
@@ -35,7 +39,7 @@ class FeiraAdapter(private val onClick: (Feira) -> Unit, private val onClickExcl
 
             feira.data?.let { date ->
 
-                val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+                val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
                 val dataFormatada = dateFormat.format(date)
 
                 binding.textDataFeira.text = dataFormatada

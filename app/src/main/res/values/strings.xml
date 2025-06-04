@@ -3,9 +3,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="quantidade">Quantidade</string>
     <string name="valor_total">R$ 0.000,00</string>
-    <string name="txt_total">Total:</string>
-    <string name="exe_produto">Detergente de Prato</string>
-    <string name="exe_valor">R$ 1008.00</string>
+    <string name="txt_total">Valor Total:</string>
+    <string name="exe_produto">Creme dental</string>
+    <string name="exe_valor">R$ 1000,00</string>
     <string name="exe_quantidade">100</string>
     <string name="btn_adicionar_novo_produto">AdicionarProduto</string>
     <string name="titulo_feira">titulo</string>
@@ -26,4 +26,6 @@
     <string name="btn_excluir">Exluir item</string>
     <string name="btn_editar">editar item</string>
     <string name="Aviso">AVISO: Digite o ponto para casas decimais</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
